@@ -1,6 +1,7 @@
 import app from "./app";
+import { envVars } from "./app/config/env";
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || envVars.PORT;
 
 const main = () => {
   try {
