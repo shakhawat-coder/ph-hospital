@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 import { SpecialityService } from "./speciality.service";
 import { apiResponse } from "../../utils/apiResponse";
 import { catchAsync } from "../../utils/catchAsync";
-import status from "http-status/cloudflare";
-import { stat } from "node:fs";
+import status from "http-status";
 
 const createSpeciality = catchAsync(async (req: Request, res: Response) => {
-  const payload = req.body;
+  const payload = {
+    ...req.body,
+    icon: req.file?.path,
+  };
   const Specialty = await SpecialityService.createSpeciality(payload);
   apiResponse(res, {
     httpstatuscode: status.OK,
